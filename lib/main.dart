@@ -54,7 +54,7 @@ class MainScaffold extends StatefulWidget {
 class _MainScaffoldState extends State<MainScaffold> {
   int index = 0;
 
-  final pages = const [
+  final List<Widget> pages = const [
     HomeScreen(),
     FridgeScreen(),
     SizedBox.shrink(),
