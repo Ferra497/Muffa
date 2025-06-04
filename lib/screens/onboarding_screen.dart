@@ -40,7 +40,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: Text(loc.login),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await state.signOut();
+                },
                 child: Text(loc.skip),
               ),
               const SizedBox(height: 24),

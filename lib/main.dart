@@ -14,7 +14,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  try {
+    await Firebase.initializeApp();
+  } catch (_) {
+    // Continue without Firebase if configuration is missing
+  }
   runApp(const MuffaApp());
 }
 
@@ -68,16 +72,17 @@ class _MainScaffoldState extends State<MainScaffold> {
     return Scaffold(
       body: pages[index],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: index > 1 ? index - 1 : index,
+        currentIndex: index,
         onTap: (i) {
-          if (i == 2) return; // center is FAB
+          if (i == 2) return; // center FAB
           setState(() {
-            index = i >= 2 ? i + 1 : i;
+            index = i;
           });
         },
         items: [
           BottomNavigationBarItem(icon: const Icon(Icons.home), label: AppLocalizations.of(context).home),
           BottomNavigationBarItem(icon: const Icon(Icons.kitchen), label: AppLocalizations.of(context).fridge),
+          const BottomNavigationBarItem(icon: Icon(Icons.add), label: ''),
           BottomNavigationBarItem(icon: const Icon(Icons.settings), label: AppLocalizations.of(context).settings),
           BottomNavigationBarItem(icon: const Icon(Icons.person), label: AppLocalizations.of(context).account),
         ],
