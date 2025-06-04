@@ -14,7 +14,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
   runApp(const MuffaApp());
 }
 
@@ -68,11 +67,6 @@ class _MainScaffoldState extends State<MainScaffold> {
     return Scaffold(
       body: pages[index],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: index > 1 ? index - 1 : index,
-        onTap: (i) {
-          if (i == 2) return; // center is FAB
-          setState(() {
-            index = i >= 2 ? i + 1 : i;
           });
         },
         items: [
